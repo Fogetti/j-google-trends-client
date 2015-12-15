@@ -3,3 +3,7 @@
 Copy of nbactions.xml
 pom.xml.releaseBackup
 release.properties
+/.settings/
+/out/
+/.classpath
+/.project

@@ -27,12 +27,14 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+
 import org.apache.commons.cli.ParseException;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 import org.freaknet.gtrends.api.GoogleAuthenticator;
 import org.freaknet.gtrends.api.GoogleConfigurator;
 import org.freaknet.gtrends.api.GoogleTrendsClient;
@@ -65,6 +67,7 @@ public class App {
       }
       httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHost);
     }
+    httpClient.setRedirectStrategy(new LaxRedirectStrategy());
 
     GoogleAuthenticator authenticator = new GoogleAuthenticator(cmdLine.getUsername(), cmdLine.getPassword(), httpClient);
     GoogleTrendsClient client = new GoogleTrendsClient(authenticator, httpClient);
